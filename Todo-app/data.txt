@@ -1,0 +1,132 @@
+[
+ {
+  "id": "1",
+  "name": "Nam Tran",
+  "email": "nam@gmail.com",
+  "description": "Hello world",
+  "image": "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+  "todo": [
+   {
+    "id": "1",
+    "state": false,
+    "desc": "check email"
+   },
+   {
+    "id": "2",
+    "state": true,
+    "desc": "read book"
+   },
+   {
+    "id": "3",
+    "state": true,
+    "desc": "learn Java"
+   },
+   {
+    "id": "4",
+    "state": true,
+    "desc": "learn HTML"
+   }
+  ]
+ },
+ {
+  "id": "2",
+  "name": "Cuong Nguyen",
+  "email": "cuong@gmail.com",
+  "description": "Hello world",
+  "image": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg",
+  "todo": [
+   {
+    "id": "1",
+    "state": false,
+    "desc": "go to library"
+   },
+   {
+    "id": "2",
+    "state": true,
+    "desc": "coffee"
+   },
+   {
+    "id": "3",
+    "state": true,
+    "desc": "do homework"
+   },
+   {
+    "id": "4",
+    "state": true,
+    "desc": "play card"
+   }
+  ]
+ },
+ {
+  "id": "3",
+  "name": "An Pham",
+  "email": "an@gmail.com",
+  "description": "Hello my name's An",
+  "image": "https://1fid.com/wp-content/uploads/2022/06/girl-profile-picture-1024x1024.jpg",
+  "todo": [
+   {
+    "id": "1",
+    "state": false,
+    "desc": "have breakfast"
+   },
+   {
+    "id": "2",
+    "state": true,
+    "desc": "have lunch"
+   },
+   {
+    "id": "3",
+    "state": true,
+    "desc": "have dinner"
+   }
+  ]
+ },
+ {
+  "id": "4",
+  "name": "Binh Le",
+  "email": "binh@gmail.com",
+  "description": "Good day",
+  "image": "https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg",
+  "todo": [
+   {
+    "id": "1",
+    "state": false,
+    "desc": "watch film"
+   },
+   {
+    "id": "2",
+    "state": true,
+    "desc": "go to school"
+   },
+   {
+    "id": "3",
+    "state": true,
+    "desc": "practice writing"
+   }
+  ]
+ },
+ {
+  "id": "5",
+  "name": "Duong Le",
+  "email": "duong@gmail.com",
+  "description": "Hello world",
+  "image": "https://studiochupanhdep.com/Upload/Images/Album/tao-dang-chup-hinh-profile-0.jpg",
+  "todo": [
+   {
+    "id": "1",
+    "state": false,
+    "desc": "coffee"
+   },
+   {
+    "id": "2",
+    "state": true,
+    "desc": "practice listen"
+   },
+   {
+    "id": "3",
+    "state": false,
+    "desc": "go to school"
+   }
+  ]
+ }
+]
