@@ -3,13 +3,14 @@ import { useEffect, useState, useContext} from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, TextInput, FlatList, Picker } from 'react-native';
 import {Select,Tag} from 'antd'
 import { MyContext } from './App';
+import React from 'react';
 export default function App() {
   let navigation = useNavigation();
   let { todolist, setTodolist } = useContext(MyContext)
   let [user0, setUser0] = useState(todolist.todo)
   let [valueSearch, setValueSearch] = useState('')
   let [userIn, setUserIn] = useState(user0)
-  const [selectedValue, setSelectedValue] = useState('option1');
+  let [selectedValue, setSelectedValue] = useState('option1');
 
   let update= (id)=>{
     fetch("https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist/"+id)
@@ -35,8 +36,21 @@ useEffect(
       if (valueSearch != "")
         setUserIn(temp)
       else setUserIn(todolist.todo)
-    }, [valueSearch],[]
-  )
+    }, [valueSearch],[])
+
+  useEffect(() => {
+    if (selectedValue == "option1") { 
+      setUserIn(todolist.todo)
+    }
+    else if (selectedValue == "option2") {
+      const sortedTodos = [...user0].sort((a, b) => a.desc.localeCompare(b.desc));
+      setUserIn(sortedTodos)
+    }
+      else if (selectedValue == "option3") {
+      const sortedTodos = [...user0].sort((a, b) => b.desc.localeCompare(a.desc));
+      setUserIn(sortedTodos)
+    }
+  }, [selectedValue]);
 
   const [checkboxes, setCheckboxes] = useState([false]);
   const handleCheckboxPress = (index) => {
@@ -133,7 +147,6 @@ useEffect(
               if (userIn[j].id === i.id)
                 userIn.splice(j, 1);
             todolist.todo = userIn
-
             fetch('https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist/'+todolist.id, {
               method: 'PUT',
               headers: {'content-type':'application/json'},
@@ -203,33 +216,20 @@ useEffect(
         >
             <Text style={{textAlign:'center',marginTop:10,fontWeight:'bold',color:'green'}}>All</Text>
         </TouchableOpacity>
-
-         {/* <TouchableOpacity style={{ borderWidth: 1, height: 40,width:'20%', borderRadius: 10,borderColor:'green',flexDirection:'row',justifyContent:'space-between' }}>
-          <Text style={{ textAlign: 'center', marginTop: 10,left:10, fontWeight: 'bold', color: 'green' }}>Sort</Text>
-          <Image source={require('./assets/down.png')} style={{ height: 25, width: 25, resizeMode: 'contain',right:7,marginTop: 8 }}></Image>
-        </TouchableOpacity> */}
-        <Picker
-          selectedValue={selectedValue}
-          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-          style={{borderWidth: 1, height: 40,width:'20%', borderRadius: 10,borderColor:'green',flexDirection:'row',justifyContent:'space-between' }}
-        >
-          <Picker.Item label="Lựa chọn 1" value="option1" />
-          <Picker.Item label="Lựa chọn 2" value="option2" />
-          <Picker.Item label="Lựa chọn 3" value="option3" />
-        </Picker>
-
-        {/* <Select defaultValue="Medium" style={{borderWidth: 1, height: 40,width:'20%', borderRadius: 10,borderColor:'green',flexDirection:'row',justifyContent:'space-between' }}>
-            <Select.Option value='High' label='High'>
-              <Tag color='red'>High</Tag>
-            </Select.Option>
-            <Select.Option value='Medium' label='Medium'>
-              <Tag color='blue'>Medium</Tag>
-            </Select.Option>
-            <Select.Option value='Low' label='Low'>
-              <Tag color='gray'>Low</Tag>
-            </Select.Option>
-          </Select> */}
-
+        <View style={{ height: 40,width:'30%', borderRadius: 10,flexDirection:'row',justifyContent:'space-between' }}>
+          <Text style={{textAlign:'center',marginTop:10,fontWeight:'bold',color:'green'}}>Sort:  </Text>
+          <Picker
+              onValueChange={(itemValue) => {
+              setSelectedValue(itemValue);
+              console.log(userIn);
+              }} 
+            style={{ flex: 1 }}
+          >
+              <Picker.Item label="None" value="option1" />
+              <Picker.Item label="A-Z"  value="option2" />
+              <Picker.Item label="Z-A"  value="option3" />
+            </Picker>
+        </View>
       </View>
       <View style={{ marginTop: 20 }}></View>
       <FlatList
@@ -247,6 +247,8 @@ useEffect(
         <Image source={require('./assets/plus.png')} style={{height:60,width:60,resizeMode:'contain'}}></Image>
       </TouchableOpacity>
     </View>
+    
+
   );
 }
 const styles = StyleSheet.create({

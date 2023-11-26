@@ -62,25 +62,9 @@ export default function App() {
             let userFound = false;
             for (let i = 0; i < DATA.length; i++) {
               if (DATA[i].email == emailIn && DATA[i].password == passwordIn) {
-                userFound = true;
                 setTodolist(DATA[i]);
                 navigation.navigate("Screen02", { todolist: DATA[i] });
-                break; 
               }
-            }
-            if (!userFound) {
-              Alert.alert(
-                'Đăng nhập thất bại',
-                'Email hoặc mật khẩu sai',
-                [
-                  {
-                    text: 'Cancel',
-                    onPress: () => console.log('Cancel Pressed'),
-                    style: 'cancel',
-                  },
-                  { text: 'OK', onPress: () => console.log('OK Pressed') },
-                ],
-              );
             }
           }}
         >
