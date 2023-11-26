@@ -1,6 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useEffect, useState, useContext} from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, TextInput, FlatList } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet, TextInput, FlatList, Picker } from 'react-native';
+import {Select,Tag} from 'antd'
 import { MyContext } from './App';
 export default function App() {
   let navigation = useNavigation();
@@ -8,7 +9,8 @@ export default function App() {
   let [user0, setUser0] = useState(todolist.todo)
   let [valueSearch, setValueSearch] = useState('')
   let [userIn, setUserIn] = useState(user0)
-  
+  const [selectedValue, setSelectedValue] = useState('option1');
+
   let update= (id)=>{
     fetch("https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist/"+id)
     .then(response=>{
@@ -33,11 +35,10 @@ useEffect(
       if (valueSearch != "")
         setUserIn(temp)
       else setUserIn(todolist.todo)
-    }, [valueSearch]
+    }, [valueSearch],[]
   )
 
-  const [checkboxes, setCheckboxes] = useState([false, false, false, false,false,false]);
-
+  const [checkboxes, setCheckboxes] = useState([false]);
   const handleCheckboxPress = (index) => {
     const newCheckboxes = [...checkboxes];
     newCheckboxes[index] = !newCheckboxes[index];
@@ -115,7 +116,7 @@ useEffect(
           >
             {checkboxes[i.id] && <Image style={{ left: 20, width: 20, height: 20, resizeMode: 'contain', position: 'absolute' }} source={require('./assets/check.png')}></Image>}
             {!checkboxes[i.id] && <Image style={{ left: 20, width: 20, height: 20, resizeMode: 'contain', position: 'absolute' }} source={require('./assets/Frame.png')}></Image>}
-            <Text style={{ flex: 1, padding: 20, marginLeft: 40 }}>{i.desc}</Text>
+            <Text style={{ flex: 1, padding: 20, marginLeft: 40, textDecorationStyle: 'solid' }}><del>{i.desc}</del></Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
@@ -175,7 +176,62 @@ useEffect(
         onChangeText={setValueSearch}
         ></TextInput>
       </View>
-      <View style={{ marginTop: 50 }}></View>
+      <View style={{ marginTop: 10 }}></View>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        
+        <TouchableOpacity style={{ borderWidth: 1, height: 40, width: '20%', borderRadius: 10, borderColor: 'red' }}
+          onPress={() => { 
+            const filteredData = todolist.todo.filter(item => item.state === false);
+            setUserIn(filteredData)
+          }}
+        >
+            <Text style={{textAlign:'center',marginTop:10,fontWeight:'bold',color:'red'}}>Pending</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={{ borderWidth: 1, height: 40, width: '20%', borderRadius: 10, borderColor: 'green' }}
+        onPress={() => { 
+            const filteredData = todolist.todo.filter(item => item.state === true);
+            setUserIn(filteredData)
+          }}
+        >
+            <Text style={{textAlign:'center',marginTop:10,fontWeight:'bold',color:'green'}}>Complete</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ borderWidth: 1, height: 40, width: '20%', borderRadius: 10, borderColor: 'green' }}
+        onPress={() => { 
+            setUserIn(user0)
+          }}
+        >
+            <Text style={{textAlign:'center',marginTop:10,fontWeight:'bold',color:'green'}}>All</Text>
+        </TouchableOpacity>
+
+         {/* <TouchableOpacity style={{ borderWidth: 1, height: 40,width:'20%', borderRadius: 10,borderColor:'green',flexDirection:'row',justifyContent:'space-between' }}>
+          <Text style={{ textAlign: 'center', marginTop: 10,left:10, fontWeight: 'bold', color: 'green' }}>Sort</Text>
+          <Image source={require('./assets/down.png')} style={{ height: 25, width: 25, resizeMode: 'contain',right:7,marginTop: 8 }}></Image>
+        </TouchableOpacity> */}
+        <Picker
+          selectedValue={selectedValue}
+          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+          style={{borderWidth: 1, height: 40,width:'20%', borderRadius: 10,borderColor:'green',flexDirection:'row',justifyContent:'space-between' }}
+        >
+          <Picker.Item label="Lựa chọn 1" value="option1" />
+          <Picker.Item label="Lựa chọn 2" value="option2" />
+          <Picker.Item label="Lựa chọn 3" value="option3" />
+        </Picker>
+
+        {/* <Select defaultValue="Medium" style={{borderWidth: 1, height: 40,width:'20%', borderRadius: 10,borderColor:'green',flexDirection:'row',justifyContent:'space-between' }}>
+            <Select.Option value='High' label='High'>
+              <Tag color='red'>High</Tag>
+            </Select.Option>
+            <Select.Option value='Medium' label='Medium'>
+              <Tag color='blue'>Medium</Tag>
+            </Select.Option>
+            <Select.Option value='Low' label='Low'>
+              <Tag color='gray'>Low</Tag>
+            </Select.Option>
+          </Select> */}
+
+      </View>
+      <View style={{ marginTop: 20 }}></View>
       <FlatList
         data={userIn} renderItem={({ item }) => <Item i={item}></Item>}
       >
