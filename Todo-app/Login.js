@@ -8,8 +8,11 @@ export default function App() {
   let [emailIn, setEmail] = useState('')
   let [passwordIn, setPassword] = useState('')
   let [showPassword, setShowPassword] = useState(false);
+   let [TB, setTB] = useState('')
   let [image, setImage] = useState(require('./assets/eyeopen.png'));
   let [DATA, setData] = useState([])
+   const [showTB, setShowTB] = useState(false);
+  
   fetch("https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist")
     .then(response=>{
       if (response.ok)
@@ -49,6 +52,16 @@ export default function App() {
           <Image source={image} style={{height:30,width:30,resizeMode:'contain',position:'absolute'}}></Image>
         </TouchableOpacity>
       </View>
+      {showTB && (
+         <View style={{marginTop:10}}>
+          <Text style={{marginTop: 10,
+                padding: 10,
+                width: "100%",color:'red',fontWeight:'bold'}}>
+            {TB}
+            </Text>
+              
+          </View>
+      )}
       <View style={{ flex: 1 }}></View>      
         <TouchableOpacity
           style={{
@@ -59,10 +72,13 @@ export default function App() {
             height: 40,
           }}
           onPress={() => {
-            let userFound = false;
             for (let i = 0; i < DATA.length; i++) {
-              if (DATA[i].email == emailIn && DATA[i].password == passwordIn) {
-                setTodolist(DATA[i]);
+              if (DATA[i].email == emailIn && DATA[i].password != passwordIn) { 
+                setTB("Email hoặc mật khẩu không đúng")
+                setShowTB(true)
+              }
+              else if (DATA[i].email == emailIn && DATA[i].password == passwordIn) {
+                 setTodolist(DATA[i]);
                 navigation.navigate("Main", { todolist: DATA[i] });
               }
             }

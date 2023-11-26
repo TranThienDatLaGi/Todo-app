@@ -17,7 +17,7 @@ export default function App() {
   const [title, setTitle] = useState("");
 
   const addData = () => { 
-    const newTodo = { id:uuidv4(), state: false, desc: title }
+    const newTodo = { id:lenght+1+"", state: false, desc: title }
     todolist.todo.push(newTodo);
     fetch('https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist/' + todolist.id, {
     method: 'PUT', 
@@ -72,7 +72,25 @@ export default function App() {
         <Text style={{ textAlign: 'center', color: 'white', fontSize: 17 }}
         >FINISH</Text>
       </TouchableOpacity>
+
+      <View style={{ position: 'absolute',
+          bottom: 0,
+          padding: 10,
+          width: '100%',
+          alignItems: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center'}}
+            onPress={() => {
+              navigation.navigate("Account",
+                { todolist: todolist });
+          }}
+          >
+            <Image source={require('./assets/user.png')} style={{height:45,width:45,resizeMode:'contain'}}></Image>
+            </TouchableOpacity>
+      </View>
+      
+
     </View>
+    
   );
 };
 const styles = StyleSheet.create({

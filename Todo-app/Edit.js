@@ -8,18 +8,10 @@ export default function App() {
   let route =useRoute();
   let {id } = route.params;
   let user0 = [];
-  user0 = todolist.todo;
-  const objectKeys = [];
-    for (let objectKey in todolist.todo) {
-        objectKeys.push(objectKey);
-    }
-  let lenght = objectKeys.length;
-  
+  user0 = todolist.todo;  
   const [title, setTitle] = useState(todolist.todo[id-1].desc);
 
   const updateData = () => { 
-    // const newTodo = { id:(lenght+1+""), state: false, desc: title }
-    // todolist.todo.push(newTodo);
     todolist.todo[id - 1].desc = title;
     fetch('https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist/' + todolist.id, {
     method: 'PUT', 
@@ -38,13 +30,13 @@ export default function App() {
 .catch(error => {
   // Handle connection or processing errors
 });
-    navigation.navigate("Screen02", {todolist:todolist});
+    navigation.navigate("Main", {todolist:todolist});
   }
   return (
     <View style={styles.container}>
       <View style={{flexDirection:'row',justifyContent:'space-between',alignItems:'center',padding:10}}>
         <TouchableOpacity style={{ paddingHorizontal: 10 }}
-        onPress={()=>{navigation.navigate("Screen02",{todolist:todolist})}}
+        onPress={()=>{navigation.navigate("Main",{todolist:todolist})}}
         >
           <Text style={{color:'black',fontSize:16}}>Back</Text>
         </TouchableOpacity>
@@ -73,8 +65,24 @@ export default function App() {
         onPress={updateData}
       >
         <Text style={{ textAlign: 'center', color: 'white', fontSize: 17 }}
-        >FINISH</Text>
+        >CHANGE</Text>
       </TouchableOpacity>
+
+       <View style={{ position: 'absolute',
+          bottom: 0,
+          padding: 10,
+          width: '100%',
+          alignItems: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center'}}
+            onPress={() => {
+              navigation.navigate("Account",
+                { todolist: todolist });
+          }}
+          >
+            <Image source={require('./assets/user.png')} style={{height:45,width:45,resizeMode:'contain'}}></Image>
+            </TouchableOpacity>
+      </View>
+
     </View>
   );
 };

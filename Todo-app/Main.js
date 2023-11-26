@@ -10,7 +10,7 @@ export default function App() {
   let [valueSearch, setValueSearch] = useState('')
   let [userIn, setUserIn] = useState(user0)
   let [selectedValue, setSelectedValue] = useState('option1');
-
+  
   let update= (id)=>{
     fetch("https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist/"+id)
     .then(response=>{
@@ -248,7 +248,7 @@ useEffect(
           </TouchableOpacity>
           <TouchableOpacity style={{ alignItems: 'center',paddingRight:20 }}
             onPress={() => {
-              navigation.navigate("Screen01",
+              navigation.navigate("Account",
                 { todolist: todolist });
           }}
           >
