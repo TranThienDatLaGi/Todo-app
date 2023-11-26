@@ -5,6 +5,7 @@ import Main from './Main'
 import Add from './Add'
 import Edit from './Edit'
 import Account from './Account'
+import Register from './Register'
 import { createContext, useState } from "react"
 export let  MyContext = createContext()
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
           <Stack.Screen name="Add" component={Add} options={{ headerShown: false }} />
           <Stack.Screen name="Edit" component={Edit} options={{ headerShown: false }} />
           <Stack.Screen name="Account" component={Account} options={{ headerShown: false }} />
+          <Stack.Screen name="Register" component={Register} options={{ headerShown: false }} />
         </Stack.Navigator>
         </NavigationContainer>
       </MyContext.Provider>

@@ -84,11 +84,20 @@ export default function App() {
             }
           }}
         >
-  <Text style={{ color: 'white', fontSize: '14px', textAlign: 'center' }}>
+  <Text style={{ color: 'white', fontSize: '14px', textAlign:'center' }}>
     GET START
   </Text>
 </TouchableOpacity>
 
+      <TouchableOpacity
+        style={{ height: 40, left: 280, with: 200, marginTop: 20 }}
+        onPress={() => { 
+          navigation.navigate("Register");
+        }}>
+          <Text style={{ color: '#00BDD6', fontSize: '14px',fontWeight:'400',fontStyle: 'italic' }}>
+            REGISTER
+          </Text>
+      </TouchableOpacity>
       
       <View style={{ flex: 1 }}></View>
     </View>
