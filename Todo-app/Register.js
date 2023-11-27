@@ -103,11 +103,11 @@ export default function App() {
       </TouchableOpacity>
       <View style={{ flex: 1 }}></View>
       <Text style={{ textAlign: 'center', fontSize: 24, color: '#8353E2', fontWeight: 'bold' }}>REGISTER</Text>
-      <View style={{ flex: 2 }}></View>    
-      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft: 40 }} placeholder='Enter your name'
+      <View style={{ flex: 2 }}></View>
+      <Text style={{ height: 40, flex: 1,fontWeight:'bold',paddingLeft:30 }}>Name</Text>
+      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft:30,marginLeft: 20,marginRight:15 }} placeholder='Enter your name'
       onChangeText={setName}
       ></TextInput>
-      <View style={{ flex: 0.5 }}></View>
       {showEmail && (
          <View style={{marginTop:10}}>
           <Text style={{marginTop: 10,
@@ -118,16 +118,19 @@ export default function App() {
               
           </View>
       )}
-      <View style={{ flex: 0.5 }}></View>    
-      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft: 40 }} placeholder='Enter your Email'
+      <View style={{ flex: 0.5 }}></View>  
+      <Text style={{ height: 40, flex: 1,fontWeight:'bold',paddingLeft:30 }}>Email</Text>
+      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft:30,marginLeft: 20,marginRight:15 }} placeholder='Enter your Email'
       onChangeText={setEmail}
       ></TextInput>
-      <View style={{ flex: 0.5 }}></View>    
-      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft: 40 }} placeholder='Enter your Password'
+      <View style={{ flex: 0.5 }}></View>
+      <Text style={{ height: 40, flex: 1,fontWeight:'bold',paddingLeft:30 }}>Password</Text>
+      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft:30,marginLeft: 20,marginRight:15 }} placeholder='Enter your Password'
       onChangeText={setPass}
       ></TextInput>
-      <View style={{ flex: 0.5 }}></View>    
-      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft: 40 }} placeholder='Confirm your Password'
+      <View style={{ flex: 0.5 }}></View>
+      <Text style={{ height: 40, flex: 1,fontWeight:'bold',paddingLeft:30 }}>Confirm Password</Text>
+      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft:30,marginLeft: 20,marginRight:15 }} placeholder='Confirm your Password'
       onChangeText={setPassAgain}
       ></TextInput>
       <View style={{ flex: 0.5 }}></View>
@@ -141,7 +144,8 @@ export default function App() {
               
           </View>
       )}
-      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft: 40 }} placeholder='Enter your Description'
+      <Text style={{ height: 40, flex: 1,fontWeight:'bold',paddingLeft:30 }}>Description</Text>
+      <TextInput style={{ height: 40, flex: 1, borderRadius: 5, borderWidth: 1, paddingLeft:30,marginLeft: 20,marginRight:15 }} placeholder='Enter your Description'
       onChangeText={setDescription}
       ></TextInput>
     <View style={{ flex: 2 }}></View>    
