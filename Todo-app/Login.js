@@ -73,13 +73,15 @@ export default function App() {
           }}
           onPress={() => {
             for (let i = 0; i < DATA.length; i++) {
-              if (DATA[i].email == emailIn && DATA[i].password != passwordIn) { 
+              if (DATA[i].email != emailIn && DATA[i].password != passwordIn) { 
                 setTB("Email hoặc mật khẩu không đúng")
                 setShowTB(true)
               }
               else if (DATA[i].email == emailIn && DATA[i].password == passwordIn) {
-                 setTodolist(DATA[i]);
+                setTodolist(DATA[i]);
+                console.log(DATA[i]);
                 navigation.navigate("Main", { todolist: DATA[i] });
+               
               }
             }
           }}
