@@ -51,7 +51,7 @@ export default function App() {
           </View>
         </View>
       </View>
-    <Text style={{textAlign:'center',fontSize:40,fontWeight:'bold',marginTop:40,marginBottom:30}}>ADD YOUR JOB</Text>
+    <Text style={{textAlign:'center',fontSize:40,fontWeight:'bold',marginTop:40,marginBottom:30}}>CHANGE YOUR JOB</Text>
       <View style={{ flexDirection: 'row', alignItems: 'center'}}>
         <Image source={require('./assets/Frame.png')} style={{ height: 20, width: 20, resizeMode: 'contain', left: 28 }}></Image>
         <TextInput style={{ borderWidth: 1, height: 45, flex: 1, paddingLeft: 40, marginRight: 20, borderRadius: 5 }}
