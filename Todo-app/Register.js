@@ -13,8 +13,17 @@ export default function App() {
   let [pass, setPass] = useState('')
   let [passAgain, setPassAgain] = useState('')
   let [description, setDescription] = useState('')
+  let [TB, setTB] = useState('') 
+  let [TBPass, setTBPass] = useState('Mật khẩu không khớp') 
 
-
+  const isValidEmail = (email) => {
+    const emailRegex = new RegExp( /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+    return emailRegex.test(email);
+  };
+  const isValidPassword = (pass) => {
+    const emailRegex = new RegExp( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/);
+    return emailRegex.test(pass);
+  };
   
 
    fetch("https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist")
@@ -29,13 +38,26 @@ export default function App() {
   const handleRegister = () => {
     for (let i = 0; i < DATA.length; i++) {
       if (DATA[i].email == email) {
+        setTB("Email đã được sử dụng")
         setShowEmail(true);
-        break;
+        return;
+      }
+      else if (isValidEmail(email) == false) {
+        setTB("Email không hợp lệ")
+        setShowEmail(true);
+        return;
+      }
+      else if (isValidPassword(pass) == false) {
+        setTBPass("Password không hợp lệ, password phải từ 8-32 kí tự bao gồm chữ cái, chữ hoa và số")
+        setShowTB(true);
+        return;
       }
       else if (pass != passAgain) {
+        setShowEmail(false);
         setShowTB(true);
-        break;
+        return;
       }
+        
       else { 
         setShowEmail(false);
         setShowTB(false);
@@ -69,6 +91,8 @@ export default function App() {
       // Handle connection or processing error
     });
         navigation.navigate("Login");
+
+    
   }
   return (
     <View style={styles.container}>
@@ -89,7 +113,7 @@ export default function App() {
           <Text style={{marginTop: 10,
                 padding: 10,
                 width: "100%",color:'red',fontWeight:'bold'}}>
-            "Email đã được dùng"
+            {TB}
             </Text>
               
           </View>
@@ -112,7 +136,7 @@ export default function App() {
           <Text style={{marginTop: 10,
                 padding: 10,
                 width: "100%",color:'red',fontWeight:'bold'}}>
-            "Mật khẩu không khớp"
+            {TBPass}
             </Text>
               
           </View>

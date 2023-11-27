@@ -11,8 +11,12 @@ export default function App() {
   const [inputValue, setInputValue] = useState('');
   const [passValue, setPassValue] = useState('');
   const [type, setType] = useState('');
+  let [TBPass, setTBPass] = useState('')
   
-
+const isValidPassword = (pass) => {
+    const emailRegex = new RegExp( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,32}$/);
+    return emailRegex.test(pass);
+  };
 let update= (id)=>{
     fetch("https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist/"+id)
     .then(response=>{
@@ -84,9 +88,16 @@ let update= (id)=>{
 
     }
     else if (type == "changePass") {
-      if (todolist.password != inputValue) {
-        setShowTB(!showTB);
+      if (isValidPassword(passValue) == false) {
+        setTBPass("Password không hợp lệ, password phải từ 8-32 kí tự bao gồm chữ cái, chữ hoa và số")
+        setShowTB(true);
+        return;
       }
+      else if (todolist.password != inputValue) {
+        setTBPass("Mật khẩu không khớp với mật khẩu hiện tại!!")
+        setShowTB(!showTB);
+        return;
+      } 
       else {
         todolist.password = passValue;
         fetch('https://65435c0201b5e279de2039f4.mockapi.io/api/v1/todolist/' + todolist.id, {
@@ -163,7 +174,7 @@ let update= (id)=>{
                 borderColor: 'gray',
                 borderRadius: 5,
                 width: 200}}
-              placeholder="Type something..."
+              placeholder="Type New Pass..."
               value={passValue}
               onChangeText={setPassValue}
           />
@@ -177,7 +188,7 @@ let update= (id)=>{
                 borderColor: 'gray',
                 borderRadius: 5,
                 width: 200,color:'red',fontWeight:'bold'}}>
-            Mật khẩu không khớp với mật khẩu hiện tại!!
+            {TBPass}
             </Text>
               
           </View>
